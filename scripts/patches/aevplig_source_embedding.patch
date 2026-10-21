@@ -1,0 +1,39 @@
+diff --git a/aev_plig/model.py b/aev_plig/model.py
+index 84b1f60..1a04ce2 100644
+--- a/aev_plig/model.py
++++ b/aev_plig/model.py
+@@ -21,7 +21,15 @@ class GATv2Net(torch.nn.Module):
+         self.GNN_layers = nn.ModuleList()
+         self.BN_layers = nn.ModuleList()
+         
+-        input_dim = node_feature_dim
++        # Source embedding: route a per-complex dataset_idx (0 = experimental,
++        # 1 = synthetic) through an embedding that is concatenated onto the node
++        # features before the GNN layers. dataset_emb_dim and num_datasets are
++        # read from config when present, otherwise default to 32 and 2.
++        self.dataset_emb_dim = getattr(config, "dataset_emb_dim", 32)
++        self.num_datasets = getattr(config, "num_datasets", 2)
++        self.dataset_idx_embedding = nn.Embedding(self.num_datasets, self.dataset_emb_dim)
++
++        input_dim = node_feature_dim + self.dataset_emb_dim
+         head = config.n_heads
+         hidden_dim = config.hidden_dim
+         
+@@ -45,6 +53,17 @@ class GATv2Net(torch.nn.Module):
+     def forward(self, data):
+         x, edge_index, edge_attr, batch = data.x, data.edge_index, data.edge_attr, data.batch
+ 
++        # Expand the per-graph dataset_idx to one value per node, embed it, and
++        # concatenate onto the node features. Falls back to all-zeros (the
++        # experimental index) when dataset_idx is absent.
++        if hasattr(data, "dataset_idx") and data.dataset_idx is not None:
++            graph_idx = data.dataset_idx.long().view(-1)
++            dataset_idx = graph_idx[batch] if batch is not None else graph_idx.expand(x.size(0))
++        else:
++            dataset_idx = torch.zeros(x.size(0), dtype=torch.long, device=x.device)
++        data_emb = self.dataset_idx_embedding(dataset_idx)
++        x = torch.cat([x, data_emb], dim=-1)
++
+         for i, (layer, bn) in enumerate(zip(self.GNN_layers, self.BN_layers)):
+             x = layer(x, edge_index, edge_attr)
+             x = self.activation(x)

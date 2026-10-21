@@ -1,0 +1,78 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the accompanying paper."
+title: "On improving experimental binding affinity predictions with synthetic data"
+type: software
+authors:
+  - given-names: Kevin
+    family-names: Ryczko
+  - given-names: "Phyo Phyo"
+    family-names: Zin
+  - given-names: Jordan
+    family-names: Crivelli-Decker
+  - given-names: Ly
+    family-names: Le
+  - given-names: "Punit K."
+    family-names: Jha
+  - given-names: "Benjamin J."
+    family-names: Shields
+  - given-names: Pablo
+    family-names: Lemos
+  - given-names: Sasaank
+    family-names: Bandi
+  - given-names: Maarten
+    name-particle: van
+    family-names: Damme
+  - given-names: Amogh
+    family-names: Sood
+  - given-names: Lee
+    family-names: Huntington
+  - given-names: Mary
+    family-names: Pitman
+  - given-names: Martin
+    family-names: Ganahl
+  - given-names: Andrea
+    family-names: Bortolato
+identifiers:
+  - type: doi
+    value: 10.64898/2026.03.02.708607
+    description: bioRxiv preprint
+repository-code: "https://github.com/sandbox-quantum/on-improving-experimental-binding-affinity-predictions-with-synthetic-data"
+license: CC-BY-NC-4.0
+preferred-citation:
+  type: article
+  title: "On improving experimental binding affinity predictions with synthetic data"
+  authors:
+    - given-names: Kevin
+      family-names: Ryczko
+    - given-names: "Phyo Phyo"
+      family-names: Zin
+    - given-names: Jordan
+      family-names: Crivelli-Decker
+    - given-names: Ly
+      family-names: Le
+    - given-names: "Punit K."
+      family-names: Jha
+    - given-names: "Benjamin J."
+      family-names: Shields
+    - given-names: Pablo
+      family-names: Lemos
+    - given-names: Sasaank
+      family-names: Bandi
+    - given-names: Maarten
+      name-particle: van
+      family-names: Damme
+    - given-names: Amogh
+      family-names: Sood
+    - given-names: Lee
+      family-names: Huntington
+    - given-names: Mary
+      family-names: Pitman
+    - given-names: Martin
+      family-names: Ganahl
+    - given-names: Andrea
+      family-names: Bortolato
+  journal: bioRxiv
+  year: 2026
+  month: 3
+  doi: 10.64898/2026.03.02.708607
+  url: "https://www.biorxiv.org/content/10.64898/2026.03.02.708607v1"
